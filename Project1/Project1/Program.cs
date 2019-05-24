@@ -98,37 +98,30 @@ namespace Project1
             List<int> dfaFinalSrate = new List<int>();
             SetDFAFinalState(DFA, nfaFinalState, dfaFinalSrate);
             Print(DFA, alpha, dfaFinalSrate);
-
+            
             //-------------------------------------------------------------------------------------------------------//
-
+            
             //minimize DFA => phase 2
-            List<DFAState> nonReachableStates = FindNonRechables(DFA);
-            RemoveNonReachable(nonReachableStates, DFA);
             int[] DFAParents = new int[DFA.Count];
             List<List<int>> prevPartitions = new List<List<int>>();
             for (int i = 0; i < DFAParents.Length; i++)
                 //با فرض این که شماره راس ها از 0 باشه و هر راس در ایندکس اسم خودش باشد
                 DFAParents[i] = i;
+
             prevPartitions = PartitionFinal(DFA, DFAParents);
             int prevCount = -1;
             int curCount = -1;
             int k = 0;
             k++;
+
             do
             {
                 prevCount = prevPartitions.Count();
                 prevPartitions = kOrderEquivalant(k, prevPartitions, DFAParents, DFA);
                 curCount = prevPartitions.Count();
             } while (prevCount != curCount);
-            List<int> newDFAParents = new List<int>();
-            List<DFAState> minimizedDFA = Minimize(DFAParents, DFA, prevPartitions, alphabet.Length,newDFAParents);
-            ConvertDFAForPrint(newDFAParents, minimizedDFA);
-            Print(minimizedDFA,alphabet);
-            Console.ReadKey();
+
         }
-
-
-
         //-----------------------------------------------------------------------------------------------------------------//
         //method => phase0 + phase1
 
@@ -233,123 +226,6 @@ namespace Project1
 
         //-------------------------------------------------------------------------------------------------------//
         //methods of phase2
-        private static void Print(List<DFAState> minimizedDFA,string[] alphabet)
-        {
-            Console.WriteLine();
-            Console.WriteLine($"{minimizedDFA.Count()}");
-            //Console.WriteLine();
-            Console.Write(alphabet[0]);
-            for(int i = 1; i < alphabet.Length; i++)
-                Console.Write(","+alphabet[i]);
-            Console.WriteLine();
-            for(int i = 0; i < minimizedDFA.Count(); i++)
-                for(int j = 0; j < alphabet.Length; j++)
-                {
-                    if(i==0 && j == 0 )
-                        Console.Write("->");
-                    if(minimizedDFA[i].isFinal)
-                        Console.Write("*");
-                    Console.Write($"q{i},{alphabet[j]},");
-                    if(minimizedDFA[minimizedDFA[i].adjList[j]].isFinal)
-                        Console.Write("*");
-                    Console.Write($"q{ minimizedDFA[i].adjList[j]}");
-                    Console.WriteLine();
-                }
-
-        }
-        private static void ConvertDFAForPrint(List<int> newDFAParents, List<DFAState> minimizedDFA)
-        {
-           
-            
-            //    int numberToBeChanged = newDFAParents[i];
-                for (int j = 0; j < minimizedDFA.Count(); j++)
-                {
-                    for (int l = 0; l < minimizedDFA[j].adjList.Length; l++)
-                    {
-                        int index = newDFAParents.IndexOf(minimizedDFA[j].adjList[l]);
-                        minimizedDFA[j].adjList[l] = index;
-
-                    }
-                }
-            
-        }
-
-        private static List<DFAState> Minimize(int[] dFAParents, List<DFAState> dFA, List<List<int>> prevPartitions
-            , int alphaCount,List<int> newParents)
-        {
-
-            List<DFAState> minimizedDFA = new List<DFAState>();
-            for (int i = 0; i < prevPartitions.Count(); i++)
-            {
-                DFAState newDFAState = new DFAState();
-                newDFAState.adjList = new int[alphaCount];
-                int state = prevPartitions[i][0];
-                for (int j = 0; j < alphaCount; j++)
-                {
-                    newDFAState.adjList[j] = dFAParents[dFA[state].adjList[j]];
-                }
-                newDFAState.isFinal = CheckFinal(prevPartitions[i],dFA);
-                minimizedDFA.Add(newDFAState);
-                newParents.Add(dFAParents[state]);
-                if(dFAParents[state] == 0)
-                {
-                    DFAState a = minimizedDFA[0];
-                    int b = newParents[0];
-                    minimizedDFA[0] = minimizedDFA[minimizedDFA.Count()-1];
-                    newParents[0] = newParents[newParents.Count() - 1];
-                    minimizedDFA[minimizedDFA.Count()-1] = a;
-                    newParents[newParents.Count() - 1] = b;
-                }
-
-            }
-            return minimizedDFA;
-
-        }
-
-        private static bool CheckFinal(List<int> list, List<DFAState> dFA)
-        {
-            foreach (var i in list)
-                if (dFA[i].isFinal)
-                    return true;
-            return false;
-        }
-
-        private static void RemoveNonReachable(List<DFAState> nonReachableStates, List<DFAState> dFA)
-        {
-            for (int i = 0; i < nonReachableStates.Count(); i++)
-            {
-                dFA.Remove(nonReachableStates[i]);
-            }
-        }
-
-
-        private static List<DFAState> FindNonRechables(List<DFAState> dFA)
-        {
-            bool[] visited = new bool[dFA.Count()];
-            List<DFAState> result = new List<DFAState>();
-            Queue<int> queue = new Queue<int>();
-            queue.Enqueue(0);
-            while (queue.Count != 0)
-            {
-                int curState = queue.Dequeue();
-                visited[curState] = true;
-                for (int i = 0; i < dFA[curState].adjList.Count(); i++)
-                {
-
-                    {
-                        if (!visited[dFA[curState].adjList[i]])
-                            queue.Enqueue(dFA[curState].adjList[i]);
-                    }
-                }
-
-            }
-            for (int i = 0; i < visited.Length; i++)
-            {
-                if (!visited[i])
-                    result.Add(dFA[i]);
-            }
-            return result;
-        }
 
         private static List<List<int>> kOrderEquivalant(int k, List<List<int>> prevPartitions, int[] dFAParents, List<DFAState> dFA)
         {
@@ -433,7 +309,7 @@ namespace Project1
         {
             int firstIndex;
             int secondIndex;
-            for (int i = 0; i < dFA[firstState].adjList.Length; i++)
+            for (int i = 0; i < dFA[firstState].adjList.Count(); i++)
             {
                 firstIndex = dFA[firstState].adjList[i];
                 secondIndex = dFA[secondState].adjList[i];
@@ -476,7 +352,6 @@ namespace Project1
             return result;
 
         }
-
         //-------------------------------------------------------------------------------------------------------//
     }
 }
