@@ -1,0 +1,14 @@
+6
+a,b
+->q0,a,q1
+q0,b,*q3
+q1,a,q0
+q1,b,*q2
+*q2,a,q4
+*q2,b,q5
+*q3,a,q4
+*q3,b,q5
+*q4,a,q4
+*q4,b,q5
+q5,a,q5
+q5,b,q5
