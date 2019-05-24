@@ -5,17 +5,3 @@ E:\Automata\Project1\Project1\obj\Debug\Project1.csprojResolveAssemblyReference.
 E:\Automata\Project1\Project1\obj\Debug\Project1.csproj.CoreCompileInputs.cache
 E:\Automata\Project1\Project1\obj\Debug\Project1.exe
 E:\Automata\Project1\Project1\obj\Debug\Project1.pdb
-D:\uni\automata\Project1\Project1\Project1\bin\Debug\Project1.exe.config
-D:\uni\automata\Project1\Project1\Project1\bin\Debug\Project1.exe
-D:\uni\automata\Project1\Project1\Project1\bin\Debug\Project1.pdb
-D:\uni\automata\Project1\Project1\Project1\obj\Debug\Project1.csprojAssemblyReference.cache
-D:\uni\automata\Project1\Project1\Project1\obj\Debug\Project1.csproj.CoreCompileInputs.cache
-D:\uni\automata\Project1\Project1\Project1\obj\Debug\Project1.exe
-D:\uni\automata\Project1\Project1\Project1\obj\Debug\Project1.pdb
-D:\uni\automata\Automata.project1\Project1\Project1\bin\Debug\Project1.exe.config
-D:\uni\automata\Automata.project1\Project1\Project1\bin\Debug\Project1.exe
-D:\uni\automata\Automata.project1\Project1\Project1\bin\Debug\Project1.pdb
-D:\uni\automata\Automata.project1\Project1\Project1\obj\Debug\Project1.csprojAssemblyReference.cache
-D:\uni\automata\Automata.project1\Project1\Project1\obj\Debug\Project1.csproj.CoreCompileInputs.cache
-D:\uni\automata\Automata.project1\Project1\Project1\obj\Debug\Project1.exe
-D:\uni\automata\Automata.project1\Project1\Project1\obj\Debug\Project1.pdb
